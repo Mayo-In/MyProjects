@@ -1,5 +1,6 @@
 # This code demonstrates web scraping by sending HTTP requests to a webpage using the requests library and parsing the HTML content
 # with BeautifulSoup to extract specific data. It showcases the use of both libraries for efficient web data extraction.
+# Website Used for scrapping --> https://books.toscrape.com/
 
 import requests
 from bs4 import BeautifulSoup
@@ -15,16 +16,13 @@ availability = soup.select("i.icon-ok")
 
 for title in soup.find_all("a"):
     if title.has_attr("title"):
-        # print(title.get("title"))
-        data["Book_Titles"].append(title.get("title"))  #get the book tiles
+        data["Book_Titles"].append(title.get("title"))  #Get the book tiles
 
 for price in prices:
-    # print(price.text)
-    data["Book_Prices"].append(price.text)  #get the prices
+    data["Book_Prices"].append(price.text)  #Get the prices
 
 for avail in availability:
-    # print("In Stock")
-    data["Availability_Status"].append("In Stock")  #get the availability status
+    data["Availability_Status"].append("In Stock")  #Get the availability status
 
 
 df = pd.DataFrame.from_dict(data)
